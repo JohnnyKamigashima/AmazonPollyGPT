@@ -1,16 +1,5 @@
-The speaker and his deputies have expressed confidence that they will have the votes to pass the legislation, though it was not clear whether they would have to rely on support from Democrats in procedural votes to clear its way for passage — a remarkably rare occurrence that would be seen as a major defeat. Mr. McCarthy, a California Republican, has repeatedly said that he would secure the support of a majority of his conference — an unwritten but virtually inviolable rule long adhered to by speakers of both parties for bringing up legislation.
+Para utilizar o método sendAudio do bot do Telegram usando Python, você precisará usar a biblioteca python-telegram-bot. Primeiro, instale a biblioteca usando o seguinte comando:
 
-“I’m confident we’ll pass the bill,” Mr. McCarthy told reporters at the Capitol on Tuesday. Ticking off what he described as critical savings in the compromise, he added: “If people are against saving all that money, or work reforms in welfare reform — I can’t do anything about that.”
+pip install python-telegram-bot
 
-In a closed-door conference meeting on Tuesday night that lasted over an hour, Mr. McCarthy and his negotiators sought to sell their conference on the compromise, saying that Democrats had not scored any victories in the bipartisan talks and that his team had fought strenuously against the White House to prevent tax increases and secure new work requirements for social safety net programs, according to lawmakers who attended.
-
-“In a progressive-left administration and Democratic Senate, we will now have new work requirements,” Representative Patrick T. McHenry of North Carolina, one of the Republican negotiations, said at a news conference following the meeting. “We have conservative reforms that are included in this debt ceiling, and these things should help Republicans rally to the cause.”
-
-Editors’ Picks
-
-A Senior Tradition You Might Not Know About
-
-‘Succession’: Jeremy Strong on Kendall’s ‘Catastrophic’ Ending
-
-Even After Debunking, ‘Sybil’ Hasn’t Gone Away
-But even as the meeting unfolded, the Congressional Budget Office reported that the changes in work requirements for food stamp eligibility — tightening them for some adults, but loosening them for others, including veterans — would actually increase federal spending on the program by $2 billion. Overall, the budget office estimated the deal would make an additional 78,000 people eligible for nutrition assistance.
+Depois de instalar a biblioteca, você pode usar o método sendAudio para enviar um áudio ao seu bot do Telegram. Por exemplo, para enviar um áudio com o nome de arquivo 'audio.mp3':

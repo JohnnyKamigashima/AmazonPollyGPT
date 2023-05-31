@@ -98,4 +98,6 @@ if __name__ == "__main__":
             bot_response = ""
             
             polly_speak(RESPONSE_FILE + str(index))
+            os.remove(RESPONSE_FILE + str(index) + ".txt")
+            os.remove(RESPONSE_FILE + str(index) + ".mp3")
 
