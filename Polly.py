@@ -34,6 +34,8 @@ PROMPT_FILE = 'prompt.txt'
 #Define response file
 RESPONSE_FILE = 'responseGPT.txt'
 
+MP3_PLAYER = 'afplay'
+
 def polly_speak(response_file):
     # Crie uma instância do cliente da API Polly
     polly_client = boto3.client('polly')
@@ -63,7 +65,7 @@ def polly_speak(response_file):
         f.close()
 
     mp3_file = "output.mp3"
-    command = "afplay " + mp3_file
+    command = MP3_PLAYER + " " + mp3_file
     subprocess.run(command, shell=True)
 
 # 2a. Function that gets the response from OpenAI's chatbot
