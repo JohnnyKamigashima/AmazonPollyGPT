@@ -34,7 +34,7 @@ PROMPT_FILE = 'prompt.txt'
 #Define response file
 RESPONSE_FILE = 'responseGPT.txt'
 
-MP3_PLAYER = 'afplay'
+MP3_PLAYER = 'afplay -r 1.5'
 
 def polly_speak(response_file):
     # Crie uma instância do cliente da API Polly
@@ -84,11 +84,19 @@ def open_ai(prompt):
 # Run the main function
 if __name__ == "__main__":
     with open(PROMPT_FILE, "r") as file:
-        prompt = file.read()
-    
-    bot_response = open_ai(f"{BOT_PERSONALITY}{prompt}")
+        prompts = file.read()
 
     with open(RESPONSE_FILE, "w") as file:
-        file.write(bot_response)
+        file.write("")
+    
+    promptList = prompts.split('\n') 
+
+    for prompt in promptList:
+        prompt = prompt.replace('\n', '. ')
+        bot_response = open_ai(f"{BOT_PERSONALITY}{prompt}")
+
+        with open(RESPONSE_FILE, "a") as file:
+            file.write(bot_response)
+        bot_response = ""
 
     polly_speak(RESPONSE_FILE)
