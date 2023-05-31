@@ -32,7 +32,7 @@ BOT_PERSONALITY = 'Resuma em Português do Brasil, e depois adicione ponto final
 # Define Prompt file
 PROMPT_FILE = 'prompt.txt'
 #Define response file
-RESPONSE_FILE = 'responseGPT.txt'
+RESPONSE_FILE = './responses/responseGPT'
 
 MP3_PLAYER = 'afplay -r 1.5'
 
@@ -47,7 +47,7 @@ def polly_speak(response_file):
 
 
     # Defina o texto que será sintetizado em fala
-    with open(response_file, "r") as file:
+    with open(response_file + '.txt', "r") as file:
         text = file.read()
 
     # Use o método synthesize_speech() da API Polly para sintetizar o texto em fala
@@ -60,11 +60,11 @@ def polly_speak(response_file):
         )
 
     # Salve o áudio sintetizado em um arquivo mp3
-    with open('output.mp3', 'wb') as f:
+    mp3_file = response_file + ".mp3"
+    with open(mp3_file, 'wb') as f:
         f.write(response['AudioStream'].read())
         f.close()
 
-    mp3_file = "output.mp3"
     command = MP3_PLAYER + " " + mp3_file
     subprocess.run(command, shell=True)
 
@@ -86,18 +86,31 @@ if __name__ == "__main__":
     with open(PROMPT_FILE, "r") as file:
         prompts = file.read()
 
+<<<<<<< HEAD
     with open(RESPONSE_FILE, "w") as file:
         file.write("")
     
     promptList = prompts.split('\n') 
 
     for prompt in promptList:
+=======
+    promptList = prompts.split('\n') 
+
+    for index, prompt in enumerate(promptList):
+>>>>>>> ebaf1a8 (New mp3s)
         if len(prompt) > 10:
             prompt = prompt.replace('\n', '. ')
             bot_response = open_ai(f"{BOT_PERSONALITY}{prompt}")
 
+<<<<<<< HEAD
             with open(RESPONSE_FILE, "a") as file:
                 file.write(bot_response)
             bot_response = ""
+=======
+            with open(RESPONSE_FILE + str(index) + ".txt", "w") as file:
+                file.write(bot_response)
+            bot_response = ""
+            
+            polly_speak(RESPONSE_FILE + str(index))
+>>>>>>> ebaf1a8 (New mp3s)
 
-    polly_speak(RESPONSE_FILE)
