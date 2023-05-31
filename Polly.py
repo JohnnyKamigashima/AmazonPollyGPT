@@ -86,31 +86,16 @@ if __name__ == "__main__":
     with open(PROMPT_FILE, "r") as file:
         prompts = file.read()
 
-<<<<<<< HEAD
-    with open(RESPONSE_FILE, "w") as file:
-        file.write("")
-    
-    promptList = prompts.split('\n') 
-
-    for prompt in promptList:
-=======
     promptList = prompts.split('\n') 
 
     for index, prompt in enumerate(promptList):
->>>>>>> ebaf1a8 (New mp3s)
         if len(prompt) > 10:
             prompt = prompt.replace('\n', '. ')
             bot_response = open_ai(f"{BOT_PERSONALITY}{prompt}")
 
-<<<<<<< HEAD
-            with open(RESPONSE_FILE, "a") as file:
-                file.write(bot_response)
-            bot_response = ""
-=======
             with open(RESPONSE_FILE + str(index) + ".txt", "w") as file:
                 file.write(bot_response)
             bot_response = ""
             
             polly_speak(RESPONSE_FILE + str(index))
->>>>>>> ebaf1a8 (New mp3s)
 
