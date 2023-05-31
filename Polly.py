@@ -92,11 +92,12 @@ if __name__ == "__main__":
     promptList = prompts.split('\n') 
 
     for prompt in promptList:
-        prompt = prompt.replace('\n', '. ')
-        bot_response = open_ai(f"{BOT_PERSONALITY}{prompt}")
+        if len(prompt) > 10:
+            prompt = prompt.replace('\n', '. ')
+            bot_response = open_ai(f"{BOT_PERSONALITY}{prompt}")
 
-        with open(RESPONSE_FILE, "a") as file:
-            file.write(bot_response)
-        bot_response = ""
+            with open(RESPONSE_FILE, "a") as file:
+                file.write(bot_response)
+            bot_response = ""
 
     polly_speak(RESPONSE_FILE)
