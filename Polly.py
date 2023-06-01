@@ -74,7 +74,7 @@ def open_ai(prompt):
     response = requests.post(
         'https://api.openai.com/v1/completions',
         headers={'Authorization': f'Bearer {API_KEY}'},
-        json={'model': MODEL, 'prompt': prompt, 'temperature': 0.4, 'max_tokens': 3500}
+        json={'model': MODEL, 'prompt': prompt, 'temperature': 0.4, 'max_tokens': 3000}
     )
 
     result = response.json()
@@ -90,14 +90,14 @@ if __name__ == "__main__":
 
     for index, prompt in enumerate(promptList):
         if len(prompt) > 10:
-            prompt = prompt.replace('\n', '. ')
             bot_response = open_ai(f"{BOT_PERSONALITY}{prompt}")
+            bot_response = bot_response.replace('\n', '. ')
 
             with open(RESPONSE_FILE + str(index) + ".txt", "w") as file:
                 file.write(bot_response)
-            bot_response = ""
             
             polly_speak(RESPONSE_FILE + str(index))
             os.remove(RESPONSE_FILE + str(index) + ".txt")
             os.remove(RESPONSE_FILE + str(index) + ".mp3")
+        bot_response = ""
 
