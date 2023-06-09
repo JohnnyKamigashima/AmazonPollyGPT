@@ -4,6 +4,8 @@ import requests
 import json
 import os
 import threading
+import telegram
+import asyncio
 
 with open('../.openapi_credentials') as f:
     contents = f.read()
@@ -12,7 +14,7 @@ for line in contents.split('\n'):
     if line.startswith('api_key='):
         API_KEY = line[len('api_key='):]
     elif line.startswith('bot_token='):
-        BOT_TOKEN = line[len('api_secret='):]
+        BOT_TOKEN = line[len('bot_token='):]
 
 # Open api autentication files in ~/.openapi_credentials
 # api_key=
@@ -33,6 +35,7 @@ BOT_PERSONALITY = 'Resuma em Português do Brasil, e depois adicione ponto final
 PROMPT_FILE = 'prompt.txt'
 #Define response file
 RESPONSE_FILE = './responses/responseGPT'
+CHAT_ID= "-1001899083389"
 
 MP3_PLAYER = 'afplay -r 1.5'
 
@@ -64,9 +67,10 @@ def polly_speak(response_file):
     with open(mp3_file, 'wb') as f:
         f.write(response['AudioStream'].read())
         f.close()
+    asyncio.run(audio_send(CHAT_ID, mp3_file))
 
     command = MP3_PLAYER + " " + mp3_file
-    subprocess.run(command, shell=True)
+    #subprocess.run(command, shell=True)
 
 # 2a. Function that gets the response from OpenAI's chatbot
 def open_ai(prompt):
@@ -80,6 +84,19 @@ def open_ai(prompt):
     result = response.json()
     final_result = ''.join(choice['text'] for choice in result['choices'])
     return final_result
+
+async def audio_send(chat_id, output_audio):
+    """
+    Sends an audio file to a Telegram bot chat. 
+
+    :param OUTPUT_AUDIO: a string representing the path to the audio file
+    :param chat_id: an integer representing the chat id
+    :return: None
+    """
+    print(BOT_TOKEN)
+    bot = telegram.Bot(token=BOT_TOKEN)
+    audio_file=open(output_audio,'rb')
+    await bot.sendAudio(chat_id, audio_file)
 
 # Run the main function
 if __name__ == "__main__":
