@@ -4,8 +4,7 @@ import requests
 import json
 import os
 import threading
-import telegram
-import asyncio
+import telebot
 import  sys
 
 with open('../.openapi_credentials') as f:
@@ -56,21 +55,21 @@ def polly_speak(response_file):
 
     # Use o método synthesize_speech() da API Polly para sintetizar o texto em fala
     response = polly_client.synthesize_speech(
-        OutputFormat='mp3',
+        OutputFormat='ogg_vorbis',
         Text=text,
         VoiceId=voice_id,
         LanguageCode=language_code,
         Engine=engine
         )
 
-    # Salve o áudio sintetizado em um arquivo mp3
-    mp3_file = response_file + ".mp3"
-    with open(mp3_file, 'wb') as f:
+    # Salve o áudio sintetizado em um arquivo audio
+    audio_file = response_file + ".ogg"
+    with open(audio_file, 'wb') as f:
         f.write(response['AudioStream'].read())
         f.close()
-    asyncio.run(audio_send(CHAT_ID, mp3_file))
+    audio_send(CHAT_ID, audio_file)
 
-    command = MP3_PLAYER + " " + mp3_file
+    command = MP3_PLAYER + " " + audio_file
     #subprocess.run(command, shell=True)
 
 # 2a. Function that gets the response from OpenAI's chatbot
@@ -86,7 +85,7 @@ def open_ai(prompt):
     final_result = ''.join(choice['text'] for choice in result['choices'])
     return final_result
 
-async def audio_send(chat_id, output_audio):
+def audio_send(chat_id, output_audio):
     """
     Sends an audio file to a Telegram bot chat. 
 
@@ -94,9 +93,9 @@ async def audio_send(chat_id, output_audio):
     :param chat_id: an integer representing the chat id
     :return: None
     """
-    bot = telegram.Bot(token=BOT_TOKEN)
+    bot = telebot.TeleBot(BOT_TOKEN)
     audio_file=open(output_audio,'rb')
-    await bot.sendAudio(chat_id, audio_file)
+    bot.send_audio(chat_id, audio_file)
 
 # Run the main function
 if __name__ == "__main__":
@@ -115,7 +114,7 @@ if __name__ == "__main__":
             
             polly_speak(RESPONSE_FILE + str(index))
             os.remove(RESPONSE_FILE + str(index) + ".txt")
-            os.remove(RESPONSE_FILE + str(index) + ".mp3")
+            os.remove(RESPONSE_FILE + str(index) + ".ogg")
             os.remove(PROMPT_FILE)
         bot_response = ""
 
