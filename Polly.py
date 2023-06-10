@@ -6,6 +6,7 @@ import os
 import threading
 import telegram
 import asyncio
+import  sys
 
 with open('../.openapi_credentials') as f:
     contents = f.read()
@@ -32,7 +33,7 @@ MODEL = 'text-davinci-003'
 # Defining the bot's personality using adjectives
 BOT_PERSONALITY = 'Resuma em Português do Brasil, e depois adicione ponto final em todas as linhas. \n'
 # Define Prompt file
-PROMPT_FILE = 'prompt.txt'
+PROMPT_FILE = sys.argv[1]
 #Define response file
 RESPONSE_FILE = './responses/responseGPT'
 CHAT_ID= "-1001899083389"
@@ -93,7 +94,6 @@ async def audio_send(chat_id, output_audio):
     :param chat_id: an integer representing the chat id
     :return: None
     """
-    print(BOT_TOKEN)
     bot = telegram.Bot(token=BOT_TOKEN)
     audio_file=open(output_audio,'rb')
     await bot.sendAudio(chat_id, audio_file)
@@ -116,5 +116,6 @@ if __name__ == "__main__":
             polly_speak(RESPONSE_FILE + str(index))
             os.remove(RESPONSE_FILE + str(index) + ".txt")
             os.remove(RESPONSE_FILE + str(index) + ".mp3")
+            os.remove(PROMPT_FILE)
         bot_response = ""
 
