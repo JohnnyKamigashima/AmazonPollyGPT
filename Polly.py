@@ -102,13 +102,14 @@ if __name__ == "__main__":
     with open(PROMPT_FILE, "r") as file:
         prompts = file.read()
 
-    promptList = prompts.split('\n') 
+    promptList = prompts.split('\n\n').strip() 
 
     for index, prompt in enumerate(promptList):
         if len(prompt) > 10:
             bot_response = open_ai([{'role': 'user', 'content': f'{BOT_PERSONALITY} {prompt}'}])
             
-            bot_response = bot_response.replace('\n\n', '. ')
+            bot_response = bot_response.replace('\n', '. ').strip()
+            bot_response = bot_response.replace('..', '.')
 
             with open(RESPONSE_FILE + str(index) + ".txt", "w") as file:
                 file.write(bot_response)
