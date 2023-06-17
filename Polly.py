@@ -27,10 +27,10 @@ for line in contents.split('\n'):
 # region=us-east-1
 
 # Models: text-davinci-003,text-curie-001,text-babbage-001,text-ada-001
-MODEL = 'text-davinci-003'
+MODEL = 'gpt-3.5-turbo'
 
 # Defining the bot's personality using adjectives
-BOT_PERSONALITY = 'Resuma em Português do Brasil, e depois adicione ponto final em todas as linhas. \n'
+BOT_PERSONALITY = 'Resuma o texto para Português do Brasil: '
 # Define Prompt file
 PROMPT_FILE = sys.argv[1]
 #Define response file
@@ -76,13 +76,13 @@ def polly_speak(response_file):
 def open_ai(prompt):
     # Make the request to the OpenAI API
     response = requests.post(
-        'https://api.openai.com/v1/completions',
+        'https://api.openai.com/v1/chat/completions',
         headers={'Authorization': f'Bearer {API_KEY}'},
-        json={'model': MODEL, 'prompt': prompt, 'temperature': 0.4, 'max_tokens': 3000}
+        json={'model': MODEL, 'messages': prompt, 'temperature': 0.01}
     )
 
     result = response.json()
-    final_result = ''.join(choice['text'] for choice in result['choices'])
+    final_result = ''.join(choice['message'].get('content') for choice in result['choices'])
     return final_result
 
 def audio_send(chat_id, output_audio):
@@ -100,14 +100,16 @@ def audio_send(chat_id, output_audio):
 # Run the main function
 if __name__ == "__main__":
     with open(PROMPT_FILE, "r") as file:
-        prompts = file.read()
+        prompts = file.read().strip()
 
-    promptList = prompts.split('\n') 
+    promptList = prompts.split('\n\n') 
 
     for index, prompt in enumerate(promptList):
         if len(prompt) > 10:
-            bot_response = open_ai(f"{BOT_PERSONALITY}{prompt}")
-            bot_response = bot_response.replace('\n', '. ')
+            bot_response = open_ai([{'role': 'user', 'content': f'{BOT_PERSONALITY} {prompt}'}])
+            
+            bot_response = bot_response.replace('\n', '. ').strip()
+            bot_response = bot_response.replace('..', '.')
 
             with open(RESPONSE_FILE + str(index) + ".txt", "w") as file:
                 file.write(bot_response)
@@ -115,6 +117,6 @@ if __name__ == "__main__":
             polly_speak(RESPONSE_FILE + str(index))
             os.remove(RESPONSE_FILE + str(index) + ".txt")
             os.remove(RESPONSE_FILE + str(index) + ".ogg")
-            os.remove(PROMPT_FILE)
         bot_response = ""
+    os.remove(PROMPT_FILE)  
 
