@@ -100,9 +100,9 @@ def audio_send(chat_id, output_audio):
 # Run the main function
 if __name__ == "__main__":
     with open(PROMPT_FILE, "r") as file:
-        prompts = file.read()
+        prompts = file.read().strip()
 
-    promptList = prompts.split('\n\n').strip() 
+    promptList = prompts.split('\n\n') 
 
     for index, prompt in enumerate(promptList):
         if len(prompt) > 10:
