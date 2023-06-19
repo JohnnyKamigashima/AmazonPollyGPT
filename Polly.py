@@ -31,13 +31,26 @@ MODEL = 'gpt-3.5-turbo'
 
 # Defining the bot's personality using adjectives
 BOT_PERSONALITY = 'Resuma o texto para Português do Brasil: '
-# Define Prompt file
-PROMPT_FILE = sys.argv[1]
+
 #Define response file
 RESPONSE_FILE = './responses/responseGPT'
 CHAT_ID= "-1001899083389"
-
+QUEUE_FILE = 'queue.txt'
 MP3_PLAYER = 'afplay -r 1.5'
+
+# Define Prompt file
+if len(sys.argv) < 2:
+    print("Não foi fornecido argumento, usando lista queue.txt")
+    with open(QUEUE_FILE, 'r') as file:
+            PROMPT_FILE = file.readline().strip()
+
+    with open(QUEUE_FILE, 'r') as file:
+        lines = file.readlines()
+
+    with open(QUEUE_FILE, 'w') as file:
+        file.writelines(lines[1:])
+else:
+    PROMPT_FILE = sys.argv[1]
 
 def polly_speak(response_file):
     # Crie uma instância do cliente da API Polly
