@@ -110,26 +110,43 @@ def audio_send(chat_id, output_audio):
     audio_file=open(output_audio,'rb')
     bot.send_audio(chat_id, audio_file)
 
+def telegram_bot_sendtext(bot_message,chat_id):
+    data = {
+        'chat_id': chat_id,
+        'text': bot_message
+    }
+    response = requests.post(
+        'https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage',
+        json=data
+    )
+    return response.json()
+
 # Run the main function
 if __name__ == "__main__":
     with open(PROMPT_FILE, "r") as file:
         prompts = file.read().strip()
+        contador_linhas = len(prompts.split('\n'))
 
-    promptList = prompts.split('\n\n') 
+    print(contador_linhas)
+    if contador_linhas > 1:
 
-    for index, prompt in enumerate(promptList):
-        if len(prompt) > 10:
-            bot_response = open_ai([{'role': 'user', 'content': f'{BOT_PERSONALITY} {prompt}'}])
-            
-            bot_response = bot_response.replace('\n', '. ').strip()
-            bot_response = bot_response.replace('..', '.')
+        promptList = prompts.split('\n\n') 
 
-            with open(RESPONSE_FILE + str(index) + ".txt", "w") as file:
-                file.write(bot_response)
-            
-            polly_speak(RESPONSE_FILE + str(index))
-            os.remove(RESPONSE_FILE + str(index) + ".txt")
-            os.remove(RESPONSE_FILE + str(index) + ".ogg")
-        bot_response = ""
+        for index, prompt in enumerate(promptList):
+            if len(prompt) > 10:
+                bot_response = open_ai([{'role': 'user', 'content': f'{BOT_PERSONALITY} {prompt}'}])
+                
+                bot_response = bot_response.replace('\n', '. ').strip()
+                bot_response = bot_response.replace('..', '.')
+
+                with open(RESPONSE_FILE + str(index) + ".txt", "w") as file:
+                    file.write(bot_response)
+                
+                polly_speak(RESPONSE_FILE + str(index))
+                os.remove(RESPONSE_FILE + str(index) + ".txt")
+                os.remove(RESPONSE_FILE + str(index) + ".ogg")
+            bot_response = ""
+    else:
+        telegram_bot_sendtext(prompts,CHAT_ID)
     os.remove(PROMPT_FILE)  
 
