@@ -1,0 +1,97 @@
+All the test cases must be sent for the review process only after the test engineers complete writing test cases. This way, the other person in the team will not be disturbed.
+As soon as the author completes writing test cases, it must be sent to the reviewer for the test case review process.
+Now, the reviewer reviews the test case and checks the correctness, flow, and test coverage.
+After a thorough review, if the reviewer finds any mistakes in the test cases, they will put it in a different document. This document is called the Review Document, and the reviewer sends it back to the author.
+Now, the author will have to take a look at all the review comments and must start working on the changes if it is necessary and send it back to the reviewer once again for the review process. This correction process will keep going on until both the author and the reviewer are satisfied with the test cases.
+Now, if the review is successful after the author makes changes, the reviewer sends it to the test lead or the test manager for final approval.
+In the approval process, the testing team will also be kept in the loop to understand the seriousness of their jobs.
+Once the test cases are written, reviewed, and approved, they will be stored in a centralized location, which is called the test case repository.
+Techniques for Test Case Review
+The following are some of the test case review techniques,
+
+1. Self-Review
+
+As the name suggests, self-review is done by the testers who create the test cases. By looking at the Software Requirement Specification (SRS) or Functional Requirement Document (FRD), they can check if all requirements are met.
+
+2. Peer Review
+
+Peer review is done by other testers who are not much familiar with the application under test and have not created the test cases. It is also called the Maker and Checker review.
+
+3. Supervisory Review
+
+Supervisory review is done by a test lead or test manager who is higher in rank than the tester who created the test cases and has a broad knowledge of the requirements and application under test.
+
+Test Case Reviews During Test Automation
+Test case reviews are just as important during test automation as they are during manual testing. In fact, they can be even more critical in the automation context because once test cases are automated, any defects in the test cases can be repeated quickly and consistently.
+
+Testsigma: A Test Automation Solution with a Built-in Test Case Review Process
+Testsigma, a powerful low-code test automation platform that lets you automate mobile, web, and desktop apps and APIs in one place, is built with the understanding that test case reviews are important and, thus, is built in with a review workflow. Instead of using different tools for test case review and test automation, you can use Testsigma, a cloud platform that supports both in one place.
+
+With Testsigma, you can review test cases, share feedback, and eventually execute automated tests on the cloud. How to do it? It’s simple and easy. Let’s see the steps below (Assuming you already have an account on Testsigma). If you don’t have one, you can signup for one here: https://testsigma.com/signup
+
+1. Go to, Settings — Preferences — Test Case Review Management.
+
+
+2. Now, enable the Test Case Review Management option. This enables test managers to review test cases created by the test engineers and share feedback all in one place.2. You can also enable Self-Review Management if needed. This will enable developers to review their test cases on their own
+
+
+Example — Consider you’ve written test steps to automate using Testsigma’s NLP. Now, to send test cases for review, you’ll have to click Submit For Review.
+
+
+Once you click the button, you’ll get a dropdown where you can select the name of the test lead or test engineer who will review the test cases.
+
+
+On clicking submit, the reviewer will receive an email notification. Further, you can track the status in the dashboard using the Submitted For Review section. Now, the test lead can review and approve the test cases or send them back to the author for rework.
+
+
+The reviewer or test lead can also track the review requests in the Waiting For Your Review in the dashboard. You can repeat this process until the test case is approved.
+
+Automation testing using Testsigma makes the entire testing process 5x faster and saves time, cost, and effort required for testing.
+
+Tips While Reviewing Test Cases
+While reviewing the test cases, keep these tips in mind,
+
+During the review process, it is recommended to use version numbers. Example — If you’re reviewing the test cases for the first time, then mark it as v.1. And if the changes are done and re-reviewed, mark it as v.1.1. This helps identify the most recent test case, and the entire record of the changes will be maintained.
+Always meet the tester face to face to make sure that they understand the process.
+Run the test cases on the System Under Test (SUT) to better understand the results and actions involved in the test execution.
+Have a copy of the SRS/FRD during the review process for reference.
+If you are not sure about a test case and its expected result, it is best advised to talk to your client or your test lead before proceeding.
+Factors to Consider During Test Case Review
+Some factors to consider during the test case review are:
+
+Are test cases developed with the intention of finding bugs? Are the testing requirements clear?
+Identify the areas of potential impact and put them to the test.
+The expected result or behavior is correctly documented.
+The test data is correct and covers all the possible domain classes. Check if the test data covers both positive and negative scenarios.
+Aim for maximum test coverage.
+Common Mistakes During Test Case Review
+Some of the common mistakes you should avoid during the test case review process,
+
+Spelling errors: Avoid spelling mistakes as they might lead to confusion and can make statements difficult to understand.
+Grammar: When the grammar is incorrect, it is possible for misinterpretation of the test cases, which will lead to wrong results.
+Replication: Remove duplicate test cases, if any. When two or more test cases are doing the same thing, you can merge them into one, which helps save time and storage.
+Standard/Guidelines: It is crucial to check if all the standards and guidelines are followed during the test case review process.
+Redundancy: When a test case is outdated due to changes in requirements, then it is best to remove such test scenarios.
+Languages: Test cases must be simple and easy to understand.
+Format of Template: When you follow a proper template format, it will be easy for you to add or modify the test cases later on, and they will look organized as well.
+Classifying Defects Based on the Test Case Review
+If the checklist is properly utilized and the defects are uncovered, you must classify the defects using the following categories,
+
+No test data
+Incomplete test cases
+Incorrect test data
+Typos
+Inconsistent language
+Incorrect expected behavior
+Grammatical mistakes
+Incomplete results
+Missing negative test cases
+If these defects aren’t properly reviewed, chances are related bugs could creep into production. And, when production issues are reported, it will impact the software quality. And resolving the bugs at this stage is more costly than fixing them in the earlier stages.
+
+Summary
+Implementing a test case review process and checklist is a critical step in ensuring that software testing is carried out efficiently and effectively. A well-structured review process helps to identify potential defects in test cases early on, which can save time, effort, and costs in the long run. By following a comprehensive checklist, testers can ensure that all aspects of the test case have been considered and that the testing process is thorough and comprehensive. Ultimately, it helps improve the quality and reliability of the software being tested.
+
+Frequently Asked Questions
+Why do we review test cases?
+
+When you don’t do a test review process, then chances are you might miss out on certain test scenarios, accuracy might be less, and the test engineers might not take their role seriously. Thus, to avoid these issues, test case reviews are important.
