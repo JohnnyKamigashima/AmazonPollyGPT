@@ -1,2 +1,0 @@
-You have a branch feature_x here. You’ve already pushed d7322aa with the proof of concept of the new feature X. After that you’ve been working to add new element to the feature, including some changes in CSS. Now, you want to squash your last three commits in one to make your history look pretty.
-
