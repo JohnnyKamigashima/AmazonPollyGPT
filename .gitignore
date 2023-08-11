@@ -158,3 +158,20 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+.DS_Store
+queue.txt
+.idea/sonarlint/issuestore/1/9/19359a61ae2446b51b549167b014da2fcf265768
+.idea/sonarlint/issuestore/8/0/804312433a0ffca1e340fa4f388933b5a89fc2c1
+.idea/sonarlint/issuestore/8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+.idea/sonarlint/securityhotspotstore/1/9/19359a61ae2446b51b549167b014da2fcf265768
+.idea/sonarlint/securityhotspotstore/8/0/804312433a0ffca1e340fa4f388933b5a89fc2c1
+.idea/sonarlint/securityhotspotstore/8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+prompt-231510.txt
+prompt-231520.txt
+prompt-231533.txt
+prompt-231538.txt
+queue.txt
+.gitignore
+queue.txt
+.gitignore
+.DS_Store
