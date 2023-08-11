@@ -79,10 +79,6 @@ def remove_emojis(text):
                                "]+", flags=re.UNICODE)
     return emoji_pattern.sub(r'', text)
 
-texto = "Olá! 😊 Este é um exemplo de texto com emojis. 🌟"
-texto_limpo = remove_emojis(texto)
-print(texto_limpo)
-
 def polly_speak(response_file):
     # Crie uma instância do cliente da API Polly
     polly_client = boto3.client('polly')
