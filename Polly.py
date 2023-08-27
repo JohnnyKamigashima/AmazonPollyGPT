@@ -176,18 +176,19 @@ if __name__ == "__main__":
         promptList = prompts.split('\n\n') 
 
         for index, prompt in enumerate(promptList):
+            string_formatada = "{:03d}".format(numero)
             if len(prompt) > 10:
                 bot_response = open_ai([{'role': 'user', 'content': f'{BOT_PERSONALITY} {prompt}'}])
                 
                 bot_response = bot_response.replace('\n', '. ').strip()
                 bot_response = bot_response.replace('..', '.')
 
-                with open(RESPONSE_FILE + str(index) + ".txt", "w") as file:
+                with open(RESPONSE_FILE + str(string_formatada) + ".txt", "w") as file:
                     file.write(bot_response)
                 
-                polly_speak(RESPONSE_FILE + str(index))
-                os.remove(RESPONSE_FILE + str(index) + ".txt")
-                os.remove(RESPONSE_FILE + str(index) + ".mp3")
+                polly_speak(RESPONSE_FILE + str(string_formatada))
+                os.remove(RESPONSE_FILE + str(string_formatada) + ".txt")
+                os.remove(RESPONSE_FILE + str(string_formatada) + ".mp3")
             bot_response = ""
     else:
         telegram_bot_sendtext(prompts,CHAT_ID)
